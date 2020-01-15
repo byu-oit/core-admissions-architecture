@@ -1,0 +1,52 @@
+@startuml CES Admissions
+' uncomment the following line and comment the first to use locally
+!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
+
+'LAYOUT_WITH_LEGEND()
+LAYOUT_TOP_DOWN()
+'LAYOUT_LEFT_RIGHT()
+
+title CES Core Admissions Context\n as of %date("yyyy-MM-dd")
+
+Person(officer,"Officer","Admissions Officer")
+Person(applicant,"Applicant","Admissions Applicant")
+System_Ext(cashnet, "CashNet", "CashNet credit card processing")
+'System_Ext(testScoreProvider,"Test Score Provider","Test Score Provider")
+'System_Ext(transcriptProvider,"External Institutions","Transcript Providers")
+CESSystem(cesIdentity, "CES Identity", "CES Identity System")
+CESSystem(cesProfile, "CES Profile", "CES Profile System")
+CESSystem(cesEndorsement,"Endorsements","CES Endorsement System")
+CESSystem(decisionProcessing,"Decision Processing","Decision Processing System")
+External_Entity(testScoreProvider,"Test Score Provider","Test Score Provider")
+External_Entity(transcriptProvider,"External Institutions","Transcript Providers")
+External_Entity(cesSchools,"CES Schools","CES School Onboarding Processes")
+
+Context_Boundary(cesAdmissions,"CES Core Admissions") {
+    Component(testScoreProcessor,"Test Score Processor", "node.js")
+    Component(endorsementProcessor,"Endorsement Processor","node.js")
+    Component(statusEngine,"Status Engine","node.js")
+    Component(applicationInterface,"Application UI","node.js,vue")
+    Component(configurationModule,"Configuration Module","node.js")
+    Component(applicantAdministration,"Applicant Administration Module","node.js,vue")
+    Component(transcriptProcessor,"Transcript Processor","node.js")
+    Component(paymentProcessor,"Payment Processor","node.js")
+}
+Rel(officer,applicantAdministration,"Administer Applicants")
+Rel(officer,configurationModule,"Configure Application Details")
+Rel(cashnet,paymentProcessor,"Process credit card transactions for")
+Rel(testScoreProvider,testScoreProcessor,"Provide test scores to")
+Rel(transcriptProvider,transcriptProcessor,"Provide transscripts to")
+Rel(applicant,applicationInterface,"Apply for admission via")
+Rel(statusEngine,applicant,"Provide application status update to","email")
+Rel(cesEndorsement,endorsementProcessor,"Provides Endorsement Status to","event")
+'Rel(cesProfile,cesAdmissions,"Shares data between applications via")
+Rel(statusEngine,decisionProcessing,"Notification of completed applications to","event")
+
+Rel(endorsementProcessor,statusEngine,"status update","event")
+Rel(paymentProcessor,statusEngine,"payment status update","event")
+Rel(transcriptProcessor,statusEngine,"transcript status update","event")
+Rel(testScoreProcessor,statusEngine,"test score status update","event")
+
+Rel(configurationModule,applicationInterface,"sends application configuration changes to","event")
+
+@enduml
