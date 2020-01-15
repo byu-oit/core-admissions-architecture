@@ -1,6 +1,7 @@
 @startuml CES Admissions
 ' uncomment the following line and comment the first to use locally
-!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
+'!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
+!include https://raw.githubusercontent.com/brentmoore/BYU-PlantUML/master/BYU_Bounded_Context.puml
 
 'LAYOUT_WITH_LEGEND()
 LAYOUT_TOP_DOWN()
