@@ -23,6 +23,7 @@ Institutional private data resides within each institution's decision processing
 ## Consequences
 
 - Student owned data is shared only with the student's consent
-- Each institution's decision processing system will keep some data that is used by all institutions in their own decision processing system, hence duplicating the data. 
+- Each institution's decision processing system will keep some data that is used by all institutions, hence duplicating the data. 
 - Admission decisions will be pushed from each institution's decision processing system back to the Core Admissions system. 
 - Each institution, during the onboarding process, will need to access the Core Admissions and CES Profile systems to get a complete picture of the new student. 
+- Each institution's decision processing system will call the Core Admissions and CES Profile systems to get the individual views of an applicant. 
