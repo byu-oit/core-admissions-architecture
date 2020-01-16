@@ -7,7 +7,7 @@ LAYOUT_WITH_LEGEND()
 LAYOUT_TOP_DOWN()
 'LAYOUT_LEFT_RIGHT()
 
-title CES Core Admissions System Context\n as of %date("yyyy-MM-dd")
+title CES Core Admissions System Context\n as of 2020-01-15
 
 Person(officer,"Officer","Admissions Officer")
 Person(applicant,"Applicant","Admissions Applicant")
